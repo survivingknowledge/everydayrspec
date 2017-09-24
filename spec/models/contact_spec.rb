@@ -42,5 +42,6 @@ describe Contact do
     contact.valid?
     expect(contact.errors[:email]).to include("has already been taken")
   end
+  
   it 'it returns a contact\'s full name as a string'
 end
