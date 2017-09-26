@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe Phone do
   it 'does not allow duplicate phone numbers per contact' do
-    contact = Contact.create(
+    contact = Contact.create!(
       firstname: 'Joe',
       lastname: 'Tester',
       email: 'joetester@example.com'
