@@ -72,5 +72,9 @@ describe Contact do
     end
   end
 
+  it 'has three phone numbers' do
+    expect(FactoryGirl.create(:contact).phones.count).to eq 3
+  end
+
 
 end
