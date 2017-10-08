@@ -10,7 +10,7 @@ describe ContactsController do
         get :index, params: { letter: 'S' }
         expect(assigns(:contacts)).to match_array([smith])
       end
-      
+
       it 'renders the :index temple' do
         get :index, params: { letter: 'S' }
         expect(response).to render_template :index
@@ -47,13 +47,29 @@ describe ContactsController do
   end
 
   describe 'GET #new' do
-    it 'assigns a new contact to @contact'
-    it 'renders the :new template'
+    it 'assigns a new Contact to @contact' do
+      get :new
+      expect(assigns(:contact)).to be_a_new(Contact)
+    end
+
+    it 'renders the :new template' do
+      get :new
+      expect(response).to render_template :new
+    end
   end
 
   describe 'GET #edit' do
-    it 'assigns the requested contact to @contact'
-    it 'renders the :edit template'
+    it 'assigns the requested contact to @contact' do
+      contact = FactoryGirl.create(:contact)
+      get :edit, params: { id: contact }
+      expect(assigns(:contact)).to eq contact
+    end
+    
+    it 'renders the :edit template' do
+      contact = FactoryGirl.create(:contact)
+      get :edit, params: { id: contact }
+      expect(response).to render_template :edit
+    end
   end
 
   describe 'POST #create' do
