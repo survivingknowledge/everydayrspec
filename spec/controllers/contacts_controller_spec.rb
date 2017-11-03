@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 describe ContactsController do
 
   describe 'GET #index' do
@@ -64,7 +63,7 @@ describe ContactsController do
       get :edit, params: { id: contact }
       expect(assigns(:contact)).to eq contact
     end
-    
+
     it 'renders the :edit template' do
       contact = FactoryGirl.create(:contact)
       get :edit, params: { id: contact }
@@ -73,8 +72,19 @@ describe ContactsController do
   end
 
   describe 'POST #create' do
+    before :each do
+      @phones = [
+        FactoryGirl.attributes_for(:phone),
+        FactoryGirl.attributes_for(:phone),
+        FactoryGirl.attributes_for(:phone)
+      ]
+    end
     context 'with valid attributes' do
-      it 'saves the new contact in the database'
+      it 'saves the new contact in the database' do
+        expect {
+          post :create, contact: FactoryGirl.attributes_for(:contact, phones_attributes: @phones)
+        }.to change(Contact, :count).by(1)
+      end
       it 'redirects to contacts#show'
     end
 
