@@ -97,7 +97,10 @@ describe ContactsController do
           post :create, params: { contact: FactoryGirl.attributes_for(:invalid_contact) }
         }.to_not change(Contact, :count)
       end
-      it 're-renders the :new template'
+      it 're-renders the :new template' do
+        post :create, params: { contact: FactoryGirl.attributes_for(:invalid_contact) }
+        expect(response).to render_template :new
+      end
     end
   end
 
