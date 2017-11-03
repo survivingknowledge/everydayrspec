@@ -82,14 +82,21 @@ describe ContactsController do
     context 'with valid attributes' do
       it 'saves the new contact in the database' do
         expect {
-          post :create, contact: FactoryGirl.attributes_for(:contact, phones_attributes: @phones)
+          post :create, params: { contact: FactoryGirl.attributes_for(:contact, phones_attributes: @phones) }
         }.to change(Contact, :count).by(1)
       end
-      it 'redirects to contacts#show'
+      it 'redirects to contacts#show' do
+        post :create, params: { contact: FactoryGirl.attributes_for(:contact, phones_attributes: @phones) }
+        expect(response).to redirect_to contact_path(assigns[:contact])
+      end
     end
 
     context 'with invalid attributes' do
-      it 'does not save teh new contact in the database'
+      it 'does not save the new contact in the database' do
+        expect {
+          post :create, params: { contact: FactoryGirl.attributes_for(:invalid_contact) }
+        }.to_not change(Contact, :count)
+      end
       it 're-renders the :new template'
     end
   end
