@@ -1,5 +1,4 @@
 require 'rails_helper'
-
 describe UsersController do
   describe 'user access' do
     before :each do
