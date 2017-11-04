@@ -12,7 +12,7 @@ RSpec::Matchers.define :require_login do |expected|
     "expected not to require login to access the method"
   end
 
-  decription do
+  description do
     "redirect to the login form"
   end
 end

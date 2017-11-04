@@ -84,6 +84,11 @@ describe ContactsController do
     end
 
     describe 'GET #new' do
+      it 'requires login' do
+        get :new
+        expect(response).not_to require_login
+      end
+
       it 'assigns a new Contact to @contact' do
         get :new
         expect(assigns(:contact)).to be_a_new(Contact)
