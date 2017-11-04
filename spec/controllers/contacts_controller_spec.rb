@@ -36,7 +36,7 @@ describe ContactsController do
   describe 'administrator access' do
     before :each do
       user = FactoryGirl.create(:admin)
-      session[:user_id] = user.id
+      set_user_session(user)
     end
 
     describe 'GET #index' do
